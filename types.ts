@@ -1,6 +1,6 @@
 
 export type Language = 'FR' | 'NL' | 'EN';
-export type View = 'home' | 'project' | 'tour' | 'pact' | 'finances';
+export type View = 'home' | 'project' | 'tour' | 'pact' | 'cooperative' | 'finances' | 'vsp';
 
 export interface Partner {
   id: number;

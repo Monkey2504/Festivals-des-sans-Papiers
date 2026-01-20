@@ -38,28 +38,28 @@ const Header: React.FC = () => {
         <div className="flex items-center gap-10">
           <nav className="hidden lg:flex gap-8 font-anton text-xs tracking-[0.2em] uppercase">
             <button 
+              onClick={() => setView('vsp')} 
+              className={`hover:text-[#BC0000] transition-all pb-1 border-b-2 ${state.currentView === 'vsp' ? 'text-[#BC0000] border-[#BC0000]' : 'border-transparent'}`}
+            >
+              VSP BXL
+            </button>
+            <button 
               onClick={() => setView('project')} 
-              className={`hover:text-[#BC0000] transition-colors ${state.currentView === 'project' ? 'text-[#BC0000]' : ''}`}
+              className={`hover:text-[#BC0000] transition-all pb-1 border-b-2 ${state.currentView === 'project' ? 'text-[#BC0000] border-[#BC0000]' : 'border-transparent'}`}
             >
               Le Projet
             </button>
             <button 
               onClick={() => setView('tour')} 
-              className={`hover:text-[#BC0000] transition-colors ${state.currentView === 'tour' ? 'text-[#BC0000]' : ''}`}
+              className={`hover:text-[#BC0000] transition-all pb-1 border-b-2 ${state.currentView === 'tour' ? 'text-[#BC0000] border-[#BC0000]' : 'border-transparent'}`}
             >
               La Tournée
             </button>
             <button 
-              onClick={() => setView('pact')} 
-              className={`hover:text-[#BC0000] transition-colors ${state.currentView === 'pact' ? 'text-[#BC0000]' : ''}`}
+              onClick={() => setView('cooperative')} 
+              className={`hover:text-[#BC0000] transition-all pb-1 border-b-2 ${state.currentView === 'cooperative' ? 'text-[#BC0000] border-[#BC0000]' : 'border-transparent'}`}
             >
-              Le Pacte
-            </button>
-            <button 
-              onClick={() => setView('finances')} 
-              className={`hover:text-[#BC0000] transition-colors ${state.currentView === 'finances' ? 'text-[#BC0000]' : ''}`}
-            >
-              Transparence
+              La Coopérative
             </button>
           </nav>
           <LanguageSwitcher currentLang={state.language} setLang={handleSetLang} />
