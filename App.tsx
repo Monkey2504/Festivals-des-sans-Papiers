@@ -1,5 +1,6 @@
 
 import React, { useMemo, useEffect, useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { TRANSLATIONS, APP_CONFIG } from './constants';
 import { useAppContext } from './context/AppContext';
 import Header from './components/ui/Header';
@@ -104,6 +105,7 @@ const App: React.FC = () => {
 
       <GeminiAuditor />
       <CrowdfundingTracker goal={APP_CONFIG.CROWDFUNDING_GOAL} raisedInitial={APP_CONFIG.INITIAL_RAISED} t={t.common} />
+      <Analytics />
     </div>
   );
 };
