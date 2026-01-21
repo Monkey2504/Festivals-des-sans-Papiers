@@ -1,107 +1,104 @@
 
 import React from 'react';
 import { useAppContext } from '../../context/AppContext';
+import { APP_CONFIG } from '../../constants';
 
 const TourDetail: React.FC = () => {
   const { dispatch } = useAppContext();
 
+  const objectives = [
+    {
+      title: "Financer le festival",
+      desc: "L'objectif budgétaire pour un festival national de qualité est de 100 000 €. La tournée sert à collecter ces fonds étape par étape."
+    },
+    {
+      title: "Recruter des bénévoles",
+      desc: "Chaque soirée est l'occasion de rencontrer ceux qui veulent donner du temps pour l'accueil, la technique ou la logistique du grand final."
+    },
+    {
+      title: "Trouver des coopérants",
+      desc: "Nous cherchons les futurs sociétaires pour pérenniser la coopérative et garantir que cet outil technique serve aux luttes futures."
+    }
+  ];
+
   return (
-    <article className="max-w-[1200px] mx-auto px-8 py-24 text-black">
-      <header className="mb-24 border-b-8 border-black pb-16">
-        <span className="font-mono text-sm text-[#BC0000] font-black tracking-widest block mb-4 uppercase italic">Organisation Territoriale</span>
-        <h1 className="font-anton text-[8vw] leading-[0.9] tracking-tighter uppercase mb-8">LA TOURNÉE DES <br/><span className="text-[#BC0000]">QUARTIERS.</span></h1>
-        <p className="font-serif text-3xl italic max-w-3xl leading-tight opacity-70">
-          Cette page détaille le fonctionnement de la tournée, ses objectifs financiers et les modalités de collaboration avec les lieux d'accueil.
+    <article className="max-w-[1100px] mx-auto px-8 py-24 text-black">
+      <header className="mb-20 border-b-4 border-black pb-12">
+        <span className="font-mono text-xs text-[#BC0000] font-black tracking-widest block mb-4 uppercase">Organisation de la tournée</span>
+        <h1 className="font-anton text-6xl md:text-7xl leading-none uppercase mb-6 tracking-tighter">Comment nous bâtissons <br/><span className="text-[#BC0000]">le festival.</span></h1>
+        <p className="font-serif text-2xl md:text-3xl italic max-w-3xl leading-tight opacity-70">
+          La tournée est le moteur financier et humain du projet. C'est durant ces mois de quartier que nous préparons le rassemblement national.
         </p>
       </header>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-        {/* Colonne Principale */}
-        <div className="lg:col-span-8 space-y-24">
-          
-          <section className="space-y-6">
-            <h2 className="font-anton text-4xl uppercase border-b-2 border-black pb-2">Qu'est-ce que la tournée ?</h2>
-            <div className="font-mono text-lg leading-relaxed space-y-4">
-              <p>La tournée est la phase de territorialisation du projet. Elle consiste en un cycle de soirées organisées dans les différentes communes de Bruxelles.</p>
-              <p>Il ne s'agit pas d'une série d'événements promotionnels, mais d'une partie intégrante du festival. La tournée et le festival national forment un bloc indivisible.</p>
-              <p>Chaque soirée est un moment de prise de parole politique et un outil de levée de fonds pour la structure globale.</p>
+      {/* Les Objectifs Prioritaires */}
+      <section className="mb-32">
+        <h2 className="font-anton text-3xl uppercase mb-10 border-b border-black/20 pb-2">Les trois buts de la tournée</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {objectives.map((obj, i) => (
+            <div key={i} className="border-l-4 border-[#BC0000] pl-6 py-2">
+              <h3 className="font-anton text-2xl mb-3 uppercase tracking-tight">{obj.title}</h3>
+              <p className="font-mono text-sm leading-relaxed opacity-70">{obj.desc}</p>
             </div>
-          </section>
-
-          <section className="space-y-6">
-            <h2 className="font-anton text-4xl uppercase border-b-2 border-black pb-2">Quels sont les objectifs de la tournée ?</h2>
-            <div className="font-mono text-lg leading-relaxed space-y-4">
-              <p>La tournée poursuit deux objectifs précis et indissociables :</p>
-              <ul className="list-none space-y-6 pl-6 border-l-4 border-[#BC0000]">
-                <li>
-                  <strong>1. Financer le festival national :</strong> 
-                  Le budget global est estimé entre 100 000 et 150 000 euros. Les recettes générées par les soirées (bar, entrées) sont prioritairement affectées à l'atteinte de cet objectif.
-                </li>
-                <li>
-                  <strong>2. Visibiliser le collectif parrain :</strong> 
-                  Chaque étape est une tribune pour La Voix des Sans-Papiers (VSP). C'est l'occasion de présenter leurs revendications et leur actualité à un public local, quartier par quartier.
-                </li>
-              </ul>
-            </div>
-          </section>
-
-          <section className="space-y-6">
-            <h2 className="font-anton text-4xl uppercase border-b-2 border-black pb-2">Comment fonctionne une soirée de quartier ?</h2>
-            <div className="font-mono text-lg leading-relaxed space-y-4">
-              <p>L'organisation repose sur une collaboration entre la coopérative, le collectif parrain et un lieu d'accueil (centre culturel, café associatif, salle privée).</p>
-              <p><strong>Concrètement :</strong></p>
-              <ul className="list-disc pl-6 space-y-2">
-                <li>La coopérative assure la logistique technique et la coordination.</li>
-                <li>Le collectif VSP assure le contenu politique et la prise de parole.</li>
-                <li>Le lieu d'accueil met à disposition son infrastructure et son ancrage local.</li>
-              </ul>
-              <p>Les bénéfices de la soirée sont intégralement reversés au budget du festival. Ce choix est assumé pour garantir l'indépendance et la tenue de l'événement national.</p>
-            </div>
-          </section>
-
-          <section className="space-y-6">
-            <h2 className="font-anton text-4xl uppercase border-b-2 border-black pb-2">Territorialisation et Soutien des Salles</h2>
-            <div className="font-mono text-lg leading-relaxed space-y-4">
-              <p>Pour les salles partenaires, accueillir une étape de la tournée est un acte de soutien politique clair. Il s'agit de mettre l'institution culturelle au service de la lutte.</p>
-              <p>Nous recherchons des lieux qui acceptent que les recettes du bar ou des entrées soient fléchées vers le festival, reconnaissant ainsi que l'infrastructure culturelle est un levier de souveraineté pour les sans-papiers.</p>
-            </div>
-          </section>
-
+          ))}
         </div>
+      </section>
 
-        {/* Sidebar d'Action */}
-        <aside className="lg:col-span-4">
-          <div className="sticky top-40 space-y-8">
-            <div className="bg-[#F2F0EB] p-8 border-4 border-black shadow-[15px_15px_0px_0px_rgba(0,0,0,1)]">
-              <h3 className="font-anton text-3xl mb-6 uppercase text-[#BC0000]">CHIFFRES CLÉS</h3>
-              <div className="space-y-6 font-mono text-sm uppercase font-bold">
-                <div className="flex justify-between border-b border-black/10 pb-2">
-                  <span>Objectif Global</span>
-                  <span>150.000€</span>
-                </div>
-                <div className="flex justify-between border-b border-black/10 pb-2">
-                  <span>Étapes Quartiers</span>
-                  <span>10 à 12 soirées</span>
-                </div>
-                <div className="flex justify-between border-b border-black/10 pb-2">
-                  <span>Bénéficiaire</span>
-                  <span>VSP BXL</span>
-                </div>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+        <div className="lg:col-span-8 space-y-16">
+          <section className="space-y-6">
+            <h2 className="font-anton text-4xl uppercase text-[#BC0000]">L'alliance des trois acteurs</h2>
+            <p className="font-mono text-lg leading-relaxed">
+              Pour chaque événement de la tournée, nous réunissons trois forces complémentaires afin de garantir que l'action soit à la fois rentable, politique et ancrée dans le quartier :
+            </p>
+            
+            <div className="space-y-4">
+              <div className="bg-white p-6 border-2 border-black">
+                <h4 className="font-anton text-xl uppercase mb-2">1. La Coopérative</h4>
+                <p className="font-mono text-sm opacity-70 italic">Responsabilité : Elle s'occupe de l'outil technique et vérifie que chaque soirée est financièrement rentable pour le festival.</p>
+              </div>
+              <div className="bg-white p-6 border-2 border-black">
+                <h4 className="font-anton text-xl uppercase mb-2">2. La VSP BXL</h4>
+                <p className="font-mono text-sm opacity-70 italic">Responsabilité : Elle garantit que les sans-papiers sont visibles, valorisés et que le contenu de la soirée respecte les valeurs politiques de la lutte.</p>
+              </div>
+              <div className="bg-white p-6 border-2 border-black">
+                <h4 className="font-anton text-xl uppercase mb-2">3. Le Lieu Partenaire</h4>
+                <p className="font-mono text-sm opacity-70 italic">Responsabilité : Le lieu connaît son public et son quartier. Il aide à proposer un événement qui correspond aux envies des gens du coin.</p>
               </div>
             </div>
+          </section>
 
-            <div className="p-8 border-4 border-black bg-black text-white space-y-6">
-              <h4 className="font-anton text-2xl uppercase">Accueillir la tournée</h4>
-              <p className="font-mono text-xs opacity-70">
-                Si vous représentez un lieu prêt à participer à la territorialisation de la lutte.
-              </p>
-              <a 
-                href="mailto:fhzegert@gmail.com?subject=Territorialisation - Proposition de lieu"
-                className="block w-full bg-[#BC0000] text-white text-center font-anton text-xl py-4 hover:bg-white hover:text-black transition-all cursor-pointer"
-              >
-                CONTACTER LA COORDINATION
-              </a>
+          <section className="bg-black text-white p-12 border-l-[12px] border-[#BC0000]">
+            <h3 className="font-anton text-3xl mb-4">Campagne politico-culturelle</h3>
+            <p className="font-serif text-2xl italic opacity-80 leading-snug">
+              "Ces événements ne sont pas que des concerts. Ils sont le cœur de la campagne de la VSP BXL pour porter son message partout à Bruxelles."
+            </p>
+          </section>
+        </div>
+
+        <aside className="lg:col-span-4">
+          <div className="sticky top-40 bg-[#F2F0EB] p-8 border-4 border-black shadow-[15px_15px_0px_0px_rgba(0,0,0,1)]">
+            <h3 className="font-anton text-2xl mb-6 uppercase text-[#BC0000]">Bilan chiffré</h3>
+            <div className="space-y-4 font-mono text-xs uppercase font-bold">
+              <div className="flex justify-between border-b border-black/10 pb-2">
+                <span>Budget visé</span>
+                <span>100.000€</span>
+              </div>
+              <div className="flex justify-between border-b border-black/10 pb-2">
+                <span>Mobilisation</span>
+                <span>+/- 1000 pers.</span>
+              </div>
+              <div className="flex justify-between border-b border-black/10 pb-2">
+                <span>Collectif Parrain</span>
+                <span>VSP BXL</span>
+              </div>
             </div>
+            <button 
+              onClick={() => dispatch({ type: 'TOGGLE_JOIN_MODAL', payload: true })}
+              className="mt-10 w-full bg-black text-white font-anton text-xl py-6 hover:bg-[#BC0000] transition-all cursor-pointer"
+            >
+              AIDER À L'ORGANISATION
+            </button>
           </div>
         </aside>
       </div>
@@ -109,9 +106,9 @@ const TourDetail: React.FC = () => {
       <footer className="mt-32 pt-16 border-t-4 border-black text-center">
         <button 
           onClick={() => dispatch({type: 'SET_VIEW', payload: 'project'})}
-          className="font-anton text-4xl hover:text-[#BC0000] transition-all uppercase"
+          className="font-anton text-3xl hover:text-[#BC0000] transition-all uppercase cursor-pointer"
         >
-          DÉCOUVRIR LE MODÈLE DE PARRAINAGE →
+          Comprendre le modèle souverain →
         </button>
       </footer>
     </article>

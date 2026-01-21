@@ -45,7 +45,7 @@ const ProjectDetail: React.FC = () => {
           <section className="space-y-6">
             <h2 className="font-anton text-4xl uppercase border-b-2 border-black pb-2">Le Système de Parrainage Tournant</h2>
             <div className="font-mono text-lg leading-relaxed space-y-4">
-              <p>Parce que la lutte est plurielle (Bruxelles, Verviers, Anvers), l'outil est tournant. Chaque édition est pilotée par un collectif marraine différent, permettant de respecter les temporalités et les stratégies de chacun, tout en mutualisant les moyens techniques.</p>
+              <p>Parce que la lutte est plurielle (Bruxelles, Verviers, Anvers), l'outil est tournant. Chaque édition est pilotée par un collectif parrain différent, permettant de respecter les temporalités et les stratégies de chacun, tout en mutualisant les moyens techniques.</p>
             </div>
           </section>
 

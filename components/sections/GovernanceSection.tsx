@@ -9,7 +9,7 @@ const GovernanceSection: React.FC = () => {
           <span className="font-mono text-xs text-[#BC0000] tracking-widest block mb-4 uppercase">Modèle Tripartite</span>
           <h3 className="font-anton text-7xl lg:text-9xl mb-12 uppercase leading-none">ALLIANCE SOUVERAINE</h3>
           <p className="font-serif text-3xl italic opacity-60 max-w-4xl mx-auto">
-            "Nous confions chaque édition à une organisation marraine pour garantir une action immédiate et une force politique pure."
+            "Nous confions chaque édition à un collectif parrain pour garantir une action immédiate et une force politique pure."
           </p>
         </div>
         
@@ -22,7 +22,7 @@ const GovernanceSection: React.FC = () => {
               color: 'text-white' 
             },
             { 
-              title: 'L\'ORGANISATION MARRAINE', 
+              title: 'LE COLLECTIF PARRAIN', 
               actor: 'VSP BXL', 
               role: 'Porte la dimension politique, valide le contenu et valorise les personnes en lutte.', 
               color: 'text-[#BC0000]' 

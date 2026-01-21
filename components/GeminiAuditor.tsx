@@ -34,7 +34,7 @@ const GeminiAuditor: React.FC = () => {
           LEXIQUE OBLIGATOIRE :
           - Territorialisation de la lutte (au lieu de tournée).
           - Bloc indivisible (Tournée + Festival).
-          - Collectif Marraine (pour désigner la VSP cette année).
+          - Collectif Parrain (pour désigner la VSP cette année).
           - Souveraineté financière (au lieu de budget).
           - Affirmation (au lieu de visibilité).
           - Passation de l'outil (modèle tournant).

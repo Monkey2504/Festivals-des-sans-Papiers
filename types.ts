@@ -50,6 +50,7 @@ export interface AppState {
   language: Language;
   currentView: View;
   isMenuOpen: boolean;
+  isJoinModalOpen: boolean;
   scrollY: number;
   isScrolled: boolean;
 }

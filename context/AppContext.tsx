@@ -6,12 +6,20 @@ type AppAction =
   | { type: 'SET_LANGUAGE'; payload: Language }
   | { type: 'SET_VIEW'; payload: View }
   | { type: 'TOGGLE_MENU' }
+  | { type: 'TOGGLE_JOIN_MODAL'; payload?: boolean }
   | { type: 'SET_SCROLL'; payload: { y: number; isScrolled: boolean } };
+
+const getInitialView = (): View => {
+  const hash = window.location.hash.replace('#', '') as View;
+  const validViews: View[] = ['home', 'project', 'tour', 'pact', 'cooperative', 'finances', 'vsp'];
+  return validViews.includes(hash) ? hash : 'home';
+};
 
 const initialState: AppState = {
   language: (localStorage.getItem('preferred_language') as Language) || 'FR',
-  currentView: 'home',
+  currentView: getInitialView(),
   isMenuOpen: false,
+  isJoinModalOpen: false,
   scrollY: 0,
   isScrolled: false,
 };
@@ -27,10 +35,18 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
       localStorage.setItem('preferred_language', action.payload);
       return { ...state, language: action.payload };
     case 'SET_VIEW':
-      window.scrollTo(0, 0);
+      if (window.location.hash !== `#${action.payload}`) {
+        window.location.hash = action.payload === 'home' ? '' : action.payload;
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       return { ...state, currentView: action.payload, isMenuOpen: false };
     case 'TOGGLE_MENU':
       return { ...state, isMenuOpen: !state.isMenuOpen };
+    case 'TOGGLE_JOIN_MODAL':
+      const newState = action.payload !== undefined ? action.payload : !state.isJoinModalOpen;
+      if (newState) document.body.style.overflow = 'hidden';
+      else document.body.style.overflow = 'unset';
+      return { ...state, isJoinModalOpen: newState };
     case 'SET_SCROLL':
       return { 
         ...state, 
@@ -46,6 +62,15 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const [state, dispatch] = useReducer(appReducer, initialState);
 
   useEffect(() => {
+    const handleHashChange = () => {
+      const view = getInitialView();
+      if (view !== state.currentView) {
+        dispatch({ type: 'SET_VIEW', payload: view });
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    
     let ticking = false;
     const handleScroll = () => {
       if (!ticking) {
@@ -61,8 +86,11 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, [state.currentView]);
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>

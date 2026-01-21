@@ -18,7 +18,7 @@ const FinanceDetail: React.FC = () => {
           </p>
           <p className="font-mono text-lg opacity-90 leading-relaxed">
             La Coopérative ne conserve que son capital d'outil de base (15k€) pour maintenir l'infrastructure. 
-            Tout le surplus budgétaire de cette édition est un levier direct pour le collectif marraine. 
+            Tout le surplus budgétaire de cette édition est un levier direct pour le collectif parrain. 
             Nous bâtissons une banque de solidarité tournante.
           </p>
         </div>
@@ -30,7 +30,7 @@ const FinanceDetail: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div className="space-y-6">
               <p className="font-mono text-sm leading-relaxed text-black/70">
-                C'est l'investissement initial nécessaire pour créer l'ASBL, le matériel de tournée et la structure juridique. Cet outil reste la propriété de la coopérative et sera transmis de collectif en collectif au fil des éditions.
+                C'est l'investissement initial nécessaire pour créer la coopérative, le matériel de tournée et la structure juridique. Cet outil reste la propriété de la coopérative et sera transmis de collectif en collectif au fil des éditions.
               </p>
               <ul className="space-y-4">
                 {APP_CONFIG.BUDGET_DETAILS.map((b, i) => (
