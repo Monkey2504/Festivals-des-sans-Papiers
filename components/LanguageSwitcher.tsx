@@ -33,7 +33,7 @@ const LanguageSwitcher: React.FC<Props> = ({
           <button
             key={langue}
             onClick={() => setLang(langue)}
-            className={`font-anton text-sm transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#BC0000] focus:ring-offset-4 px-2 py-1 ${
+            className={`font-mono text-xs transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#BC0000] focus:ring-offset-2 px-3 py-2 rounded-sm ${
               currentLang === langue 
                 ? 'text-[#BC0000] border-b-2 border-[#BC0000]' 
                 : 'text-black/40 hover:text-black hover:scale-110'

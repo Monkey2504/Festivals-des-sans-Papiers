@@ -1,114 +1,102 @@
 
 import React from 'react';
 import { useAppContext } from '../../context/AppContext';
-import { APP_CONFIG } from '../../constants';
 
 const TourDetail: React.FC = () => {
   const { dispatch } = useAppContext();
 
   const objectives = [
-    {
-      title: "Financer le festival",
-      desc: "L'objectif budgétaire pour un festival national de qualité est de 100 000 €. La tournée sert à collecter ces fonds étape par étape."
-    },
-    {
-      title: "Recruter des bénévoles",
-      desc: "Chaque soirée est l'occasion de rencontrer ceux qui veulent donner du temps pour l'accueil, la technique ou la logistique du grand final."
-    },
-    {
-      title: "Trouver des coopérants",
-      desc: "Nous cherchons les futurs sociétaires pour pérenniser la coopérative et garantir que cet outil technique serve aux luttes futures."
-    }
+    { num: '01', title: 'Financer le festival', desc: 'L\'objectif budgétaire pour un festival national de qualité est de 100 000 €. La tournée sert à collecter ces fonds étape par étape.' },
+    { num: '02', title: 'Recruter des bénévoles', desc: 'Chaque soirée est l\'occasion de rencontrer ceux qui veulent donner du temps pour l\'accueil, la technique ou la logistique du grand final.' },
+    { num: '03', title: 'Trouver des coopérants', desc: 'Nous cherchons les futurs sociétaires pour pérenniser la coopérative et garantir que cet outil technique serve aux luttes futures.' },
+  ];
+
+  const acteurs = [
+    { num: '1', title: 'La Coopérative', role: 'Elle s\'occupe de l\'outil technique et vérifie que chaque soirée est financièrement rentable pour le festival.' },
+    { num: '2', title: 'La VSP BXL', role: 'Elle garantit que les sans-papiers sont visibles, valorisés et que le contenu respecte les valeurs politiques de la lutte.' },
+    { num: '3', title: 'Le Lieu Partenaire', role: 'Il connaît son public et son quartier. Il aide à proposer un événement qui correspond aux envies des gens du coin.' },
   ];
 
   return (
-    <article className="max-w-[1100px] mx-auto px-8 py-24 text-black">
-      <header className="mb-20 border-b-4 border-black pb-12">
-        <span className="font-mono text-xs text-[#BC0000] font-black tracking-widest block mb-4 uppercase">Organisation de la tournée</span>
-        <h1 className="font-anton text-6xl md:text-7xl leading-none uppercase mb-6 tracking-tighter">Comment nous bâtissons <br/><span className="text-[#BC0000]">le festival.</span></h1>
-        <p className="font-serif text-2xl md:text-3xl italic max-w-3xl leading-tight opacity-70">
+    <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-black">
+      <header className="mb-16 border-b border-black/10 pb-10">
+        <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#BC0000] mb-5">Organisation de la tournée</p>
+        <h1 className="font-serif italic text-4xl md:text-5xl leading-tight mb-5">Comment nous bâtissons le festival.</h1>
+        <p className="text-base text-black/60 leading-relaxed max-w-2xl">
           La tournée est le moteur financier et humain du projet. C'est durant ces mois de quartier que nous préparons le rassemblement national.
         </p>
       </header>
 
-      {/* Les Objectifs Prioritaires */}
-      <section className="mb-32">
-        <h2 className="font-anton text-3xl uppercase mb-10 border-b border-black/20 pb-2">Les trois buts de la tournée</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {objectives.map((obj, i) => (
-            <div key={i} className="border-l-4 border-[#BC0000] pl-6 py-2">
-              <h3 className="font-anton text-2xl mb-3 uppercase tracking-tight">{obj.title}</h3>
-              <p className="font-mono text-sm leading-relaxed opacity-70">{obj.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+        <div className="lg:col-span-2 space-y-12">
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-        <div className="lg:col-span-8 space-y-16">
-          <section className="space-y-6">
-            <h2 className="font-anton text-4xl uppercase text-[#BC0000]">L'alliance des trois acteurs</h2>
-            <p className="font-mono text-lg leading-relaxed">
-              Pour chaque événement de la tournée, nous réunissons trois forces complémentaires afin de garantir que l'action soit à la fois rentable, politique et ancrée dans le quartier :
-            </p>
-            
+          <section>
+            <h2 className="font-serif italic text-2xl text-black mb-6">Les trois buts de la tournée</h2>
             <div className="space-y-4">
-              <div className="bg-white p-6 border-2 border-black">
-                <h4 className="font-anton text-xl uppercase mb-2">1. La Coopérative</h4>
-                <p className="font-mono text-sm opacity-70 italic">Responsabilité : Elle s'occupe de l'outil technique et vérifie que chaque soirée est financièrement rentable pour le festival.</p>
-              </div>
-              <div className="bg-white p-6 border-2 border-black">
-                <h4 className="font-anton text-xl uppercase mb-2">2. La VSP BXL</h4>
-                <p className="font-mono text-sm opacity-70 italic">Responsabilité : Elle garantit que les sans-papiers sont visibles, valorisés et que le contenu de la soirée respecte les valeurs politiques de la lutte.</p>
-              </div>
-              <div className="bg-white p-6 border-2 border-black">
-                <h4 className="font-anton text-xl uppercase mb-2">3. Le Lieu Partenaire</h4>
-                <p className="font-mono text-sm opacity-70 italic">Responsabilité : Le lieu connaît son public et son quartier. Il aide à proposer un événement qui correspond aux envies des gens du coin.</p>
-              </div>
+              {objectives.map((obj) => (
+                <div key={obj.num} className="flex gap-5 bg-white border border-black/8 rounded-sm p-5 shadow-sm">
+                  <span className="font-mono text-[10px] text-[#BC0000] tracking-widest pt-0.5 shrink-0">{obj.num}</span>
+                  <div>
+                    <h3 className="text-sm font-semibold text-black mb-1.5">{obj.title}</h3>
+                    <p className="text-sm text-black/60 leading-relaxed">{obj.desc}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </section>
 
-          <section className="bg-black text-white p-12 border-l-[12px] border-[#BC0000]">
-            <h3 className="font-anton text-3xl mb-4">Campagne politico-culturelle</h3>
-            <p className="font-serif text-2xl italic opacity-80 leading-snug">
+          <section>
+            <h2 className="font-serif italic text-2xl text-black mb-6">L'alliance des trois acteurs</h2>
+            <div className="space-y-3">
+              {acteurs.map((a) => (
+                <div key={a.num} className="bg-[#F2F0EB] rounded-sm p-5 border border-black/5">
+                  <h3 className="text-sm font-semibold text-black mb-2">{a.title}</h3>
+                  <p className="text-sm text-black/60 leading-relaxed italic">{a.role}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <blockquote className="border-l-2 border-[#BC0000] pl-5">
+            <p className="font-serif italic text-lg text-black/70 leading-relaxed">
               "Ces événements ne sont pas que des concerts. Ils sont le cœur de la campagne de la VSP BXL pour porter son message partout à Bruxelles."
             </p>
-          </section>
+          </blockquote>
         </div>
 
-        <aside className="lg:col-span-4">
-          <div className="sticky top-40 bg-[#F2F0EB] p-8 border-4 border-black shadow-[15px_15px_0px_0px_rgba(0,0,0,1)]">
-            <h3 className="font-anton text-2xl mb-6 uppercase text-[#BC0000]">Bilan chiffré</h3>
-            <div className="space-y-4 font-mono text-xs uppercase font-bold">
-              <div className="flex justify-between border-b border-black/10 pb-2">
-                <span>Budget visé</span>
-                <span>100.000€</span>
+        <aside className="lg:sticky lg:top-24 h-fit space-y-5">
+          <div className="bg-white border border-black/8 rounded-sm p-6 shadow-sm">
+            <h3 className="font-mono text-[10px] uppercase tracking-[0.25em] text-black/40 mb-4">Bilan chiffré</h3>
+            <div className="space-y-3 text-sm">
+              <div className="flex justify-between border-b border-black/5 pb-3">
+                <span className="text-black/60">Budget visé</span>
+                <span className="font-semibold">100 000 €</span>
               </div>
-              <div className="flex justify-between border-b border-black/10 pb-2">
-                <span>Mobilisation</span>
-                <span>+/- 1000 pers.</span>
+              <div className="flex justify-between border-b border-black/5 pb-3">
+                <span className="text-black/60">Mobilisation</span>
+                <span className="font-semibold">+/- 1 000 pers.</span>
               </div>
-              <div className="flex justify-between border-b border-black/10 pb-2">
-                <span>Collectif Parrain</span>
-                <span>VSP BXL</span>
+              <div className="flex justify-between">
+                <span className="text-black/60">Collectif parrain</span>
+                <span className="font-semibold">VSP BXL</span>
               </div>
             </div>
-            <button 
+            <button
               onClick={() => dispatch({ type: 'TOGGLE_JOIN_MODAL', payload: true })}
-              className="mt-10 w-full bg-black text-white font-anton text-xl py-6 hover:bg-[#BC0000] transition-all cursor-pointer"
+              className="mt-6 w-full bg-[#BC0000] text-white text-sm font-medium py-3 rounded-sm hover:bg-[#a00000] transition-colors cursor-pointer"
             >
-              AIDER À L'ORGANISATION
+              Aider à l'organisation
             </button>
           </div>
         </aside>
       </div>
 
-      <footer className="mt-32 pt-16 border-t-4 border-black text-center">
-        <button 
-          onClick={() => dispatch({type: 'SET_VIEW', payload: 'project'})}
-          className="font-anton text-3xl hover:text-[#BC0000] transition-all uppercase cursor-pointer"
+      <footer className="mt-16 pt-8 border-t border-black/10 text-center">
+        <button
+          onClick={() => dispatch({ type: 'SET_VIEW', payload: 'home' })}
+          className="text-sm text-black/40 hover:text-[#BC0000] transition-colors"
         >
-          Comprendre le modèle souverain →
+          ← Retour à l'accueil
         </button>
       </footer>
     </article>

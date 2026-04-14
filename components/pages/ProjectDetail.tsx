@@ -6,95 +6,102 @@ const ProjectDetail: React.FC = () => {
   const { dispatch } = useAppContext();
 
   return (
-    <article className="max-w-[1200px] mx-auto px-8 py-24 text-black">
-      <header className="mb-24 border-b-8 border-black pb-16">
-        <span className="font-mono text-sm text-[#BC0000] font-black tracking-widest block mb-4 uppercase italic">Note d'intention</span>
-        <h1 className="font-anton text-[8vw] leading-[0.9] tracking-tighter uppercase mb-8">COMPRENDRE LE <br/><span className="text-[#BC0000]">PROJET.</span></h1>
-        <p className="font-serif text-3xl italic max-w-3xl leading-tight opacity-70">
-          Ce projet n'est pas seulement un événement culturel, c'est une <strong>pratique de subjectivation politique</strong> qui conteste les frontières de la citoyenneté.
+    <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-black">
+      {/* Header */}
+      <header className="mb-16 border-b border-black/10 pb-10">
+        <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#BC0000] mb-5">Les deux seules conditions</p>
+        <h1 className="font-serif italic text-4xl md:text-5xl leading-tight mb-6">
+          Deux critères. Tout le reste est libre.
+        </h1>
+        <p className="text-base md:text-lg text-black/60 leading-relaxed max-w-2xl">
+          Une soirée peut prendre n'importe quelle forme : une grande fête avec DJ, une lecture de poésie, un repas partagé, un débat, une projection. N'importe quoi que le collectif a envie de faire.
         </p>
       </header>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-        {/* Colonne Principale */}
-        <div className="lg:col-span-8 space-y-24">
-          
-          <section className="space-y-6">
-            <h2 className="font-anton text-4xl uppercase border-b-2 border-black pb-2">Un Outil de Citoyenneté Active</h2>
-            <div className="font-mono text-lg leading-relaxed space-y-4">
-              <p>Le Festival des Sans-Papiers est né d'un constat sociologique : même sans statut administratif, les collectifs comme la VSP BXL exercent une <strong>citoyenneté active</strong>. Ils habitent la ville, ils travaillent, ils créent de la solidarité.</p>
-              <p>Le festival fournit l'infrastructure technique nécessaire pour que cette citoyenneté devienne visible et incontestable dans l'espace public.</p>
-              <ul className="list-none space-y-4 pl-6 border-l-4 border-[#BC0000]">
-                <li>— <strong>Territorialisation :</strong> Occuper les quartiers pour briser l'isolement.</li>
-                <li>— <strong>Auto-possession :</strong> Reprendre le contrôle de son propre récit politique.</li>
-                <li>— <strong>Souveraineté :</strong> S'autofinancer pour ne plus dépendre des médiateurs institutionnels.</li>
-              </ul>
-            </div>
-          </section>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+        {/* Main content */}
+        <div className="lg:col-span-2 space-y-10">
 
-          <section className="space-y-6">
-            <h2 className="font-anton text-4xl uppercase border-b-2 border-black pb-2">Renverser l'Équation</h2>
-            <div className="font-serif text-2xl italic leading-tight p-8 bg-[#F2F0EB] border-l-8 border-black shadow-lg">
-              "Nous cherchons à renverser l'équation qui lie légalité administrative et accès aux droits humains."
-            </div>
-            <div className="font-mono text-lg leading-relaxed space-y-4">
-              <p>Sur le plan philosophique, le projet affirme que la <strong>dignité politique</strong> ne peut être subordonnée à un tampon administratif. En construisant une coopérative possédée par les membres en lutte, nous créons une zone de souveraineté où le droit se pratique avant d'être octroyé.</p>
-            </div>
-          </section>
+          <div className="bg-[#BC0000]/5 border-l-2 border-[#BC0000] p-6 rounded-sm">
+            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#BC0000] mb-3">Condition A</p>
+            <h2 className="text-lg font-semibold text-black mb-4">
+              Le collectif de sans-papiers sort de la soirée plus puissant qu'avant.
+            </h2>
+            <p className="text-sm text-black/70 leading-relaxed">
+              Plus de réseau, plus de contacts, plus de compétences, plus de visibilité locale. Pas juste une soirée réussie — une capacité réelle à agir davantage ensuite.
+            </p>
+          </div>
 
-          <section className="space-y-6">
-            <h2 className="font-anton text-4xl uppercase border-b-2 border-black pb-2">Le Système de Parrainage Tournant</h2>
-            <div className="font-mono text-lg leading-relaxed space-y-4">
-              <p>Parce que la lutte est plurielle (Bruxelles, Verviers, Anvers), l'outil est tournant. Chaque édition est pilotée par un collectif parrain différent, permettant de respecter les temporalités et les stratégies de chacun, tout en mutualisant les moyens techniques.</p>
-            </div>
-          </section>
+          <div className="bg-black/3 border-l-2 border-black/20 p-6 rounded-sm">
+            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-black/40 mb-3">Condition B</p>
+            <h2 className="text-lg font-semibold text-black mb-4">
+              La soirée contribue à construire le festival — pas nécessairement en argent.
+            </h2>
+            <p className="text-sm text-black/70 leading-relaxed">
+              En matériel de communication, en bénévoles formés, en liens avec des lieux et des structures, en apprentissages collectifs. La contribution est libre. Ce qui compte, c'est que quelque chose reste et renforce l'ensemble.
+            </p>
+          </div>
 
+          <section className="space-y-4">
+            <h2 className="font-serif italic text-2xl text-black">Comment proposer</h2>
+            <p className="text-sm text-black/70 leading-relaxed">
+              Pas de formulaire. Une conversation. N'importe qui peut initier une soirée — un collectif de sans-papiers, un groupe de citoyens, un lieu. Dans tous les cas, c'est le collectif de sans-papiers qui décide en premier du format et du message. Les citoyens et partenaires apportent leurs ressources — ils ne prennent pas les décisions à la place.
+            </p>
+            <p className="text-sm text-black/70 leading-relaxed">
+              Envoyez votre idée à Ballal par email. On vérifie ensemble que les deux conditions sont remplies. Si elles le sont, on dit oui et on vous aide à trouver ce dont vous avez besoin.
+            </p>
+            <a
+              href="mailto:contact@festivalsanspapiers.be"
+              className="inline-block mt-2 text-sm text-[#BC0000] hover:underline underline-offset-4"
+            >
+              contact@festivalsanspapiers.be →
+            </a>
+          </section>
         </div>
 
         {/* Sidebar */}
-        <aside className="lg:col-span-4">
-          <div className="sticky top-40 space-y-8">
-            <div className="bg-black text-white p-8 border-4 border-[#BC0000] shadow-[15px_15px_0px_0px_rgba(188,0,0,1)]">
-              <h3 className="font-anton text-3xl mb-6 uppercase border-b border-white/20 pb-2">LOGIQUE</h3>
-              <ul className="font-mono text-xs space-y-6 opacity-80">
-                <li className="flex gap-4">
-                  <span className="text-[#BC0000] font-bold text-lg">01.</span>
-                  <span>AUTOGESTION TOTALE</span>
-                </li>
-                <li className="flex gap-4">
-                  <span className="text-[#BC0000] font-bold text-lg">02.</span>
-                  <span>NON-LUCRATIVITÉ RADICALE</span>
-                </li>
-                <li className="flex gap-4">
-                  <span className="text-[#BC0000] font-bold text-lg">03.</span>
-                  <span>AFFIRMATION DU SUJET</span>
-                </li>
-                <li className="flex gap-4">
-                  <span className="text-[#BC0000] font-bold text-lg">04.</span>
-                  <span>RÉSEAU TRANSNATIONAL</span>
-                </li>
-              </ul>
-            </div>
+        <aside className="lg:sticky lg:top-24 h-fit space-y-6">
+          <div className="bg-white border border-black/8 rounded-sm p-6 shadow-sm">
+            <h3 className="font-mono text-[10px] uppercase tracking-[0.25em] text-black/40 mb-4">Ce que vous construisez</h3>
+            <ul className="space-y-3 text-sm text-black/70">
+              <li className="flex gap-3"><span className="text-[#BC0000] shrink-0">—</span>Un capital financier propre au collectif</li>
+              <li className="flex gap-3"><span className="text-[#BC0000] shrink-0">—</span>Un département événementiel interne</li>
+              <li className="flex gap-3"><span className="text-[#BC0000] shrink-0">—</span>Un réseau réel dans la cité</li>
+            </ul>
+          </div>
 
-            <div className="p-8 border-4 border-black bg-white">
-              <h4 className="font-anton text-2xl uppercase mb-4">LE MANIFESTE</h4>
-              <button 
-                onClick={() => dispatch({type: 'SET_VIEW', payload: 'vsp'})}
-                className="w-full bg-black text-white font-anton text-xl py-4 hover:bg-[#BC0000] transition-all cursor-pointer"
+          <div className="bg-white border border-black/8 rounded-sm p-6 shadow-sm">
+            <h3 className="font-mono text-[10px] uppercase tracking-[0.25em] text-black/40 mb-4">En savoir plus</h3>
+            <div className="flex flex-col gap-2">
+              <button
+                onClick={() => dispatch({ type: 'SET_VIEW', payload: 'vsp' })}
+                className="text-left text-sm text-black/70 hover:text-[#BC0000] transition-colors"
               >
-                LIRE LE RÉCIT VSP BXL
+                → La VSP BXL, collectif parrain
+              </button>
+              <button
+                onClick={() => dispatch({ type: 'SET_VIEW', payload: 'cooperative' })}
+                className="text-left text-sm text-black/70 hover:text-[#BC0000] transition-colors"
+              >
+                → La coopérative
+              </button>
+              <button
+                onClick={() => dispatch({ type: 'SET_VIEW', payload: 'tour' })}
+                className="text-left text-sm text-black/70 hover:text-[#BC0000] transition-colors"
+              >
+                → La tournée
               </button>
             </div>
           </div>
         </aside>
       </div>
 
-      <footer className="mt-32 pt-16 border-t-4 border-black text-center">
-        <button 
-          onClick={() => dispatch({type: 'SET_VIEW', payload: 'home'})}
-          className="font-anton text-4xl hover:text-[#BC0000] transition-all uppercase cursor-pointer"
+      <footer className="mt-16 pt-8 border-t border-black/10 text-center">
+        <button
+          onClick={() => dispatch({ type: 'SET_VIEW', payload: 'home' })}
+          className="text-sm text-black/40 hover:text-[#BC0000] transition-colors"
         >
-          ← RETOUR À L'ACCUEIL
+          ← Retour à l'accueil
         </button>
       </footer>
     </article>

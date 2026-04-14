@@ -8,97 +8,123 @@ const VSPDetail: React.FC = () => {
 
   const manifestoText = "La Voix des Sans-Papiers de Bruxelles est un collectif autogéré fondé en 2014. Nous luttons pour la régularisation totale, l'abolition des centres fermés et la reconnaissance de notre citoyenneté active. Notre souveraineté est politique, financière et humaine.";
 
+  const revendications = [
+    { title: 'Régularisation totale', desc: 'Droit inconditionnel pour toutes les personnes sans titre de séjour.' },
+    { title: 'Abolition des centres', desc: 'Fin des expulsions et fermeture des centres de rétention.' },
+    { title: 'Citoyenneté active', desc: 'Reconnaissance pleine et entière de notre présence et de notre contribution.' },
+    { title: 'Réseau européen', desc: 'Membre de PICUM — actions locales et plaidoyer international.' },
+  ];
+
   return (
-    <article className="max-w-[1300px] mx-auto px-8 py-24 text-black">
-      
-      {/* HEADER PRINCIPAL */}
-      <header className="mb-32 border-b-[12px] border-black pb-16 relative">
-        <div className="flex justify-between items-baseline mb-8">
-          <span className="font-mono text-sm text-[#BC0000] font-black tracking-[0.3em] uppercase italic">
-            Affirmation du Sujet Politique
-          </span>
-          <div className="flex gap-4">
-             <ManifestoAudio text={manifestoText} />
-          </div>
+    <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-black">
+      <header className="mb-16 border-b border-black/10 pb-10">
+        <div className="flex items-start justify-between gap-4 mb-5">
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#BC0000]">Collectif parrain · Édition 2025–2026</p>
+          <ManifestoAudio text={manifestoText} />
         </div>
-        <h1 className="font-anton text-[10vw] leading-[0.8] tracking-tighter uppercase">
-          LA VOIX DES <br/>
-          <span className="text-[#BC0000]">SANS-PAPIERS.</span>
+        <h1 className="font-serif italic text-4xl md:text-5xl leading-tight mb-5">
+          La Voix des Sans-Papiers de Bruxelles.
         </h1>
-        <div className="mt-12 max-w-4xl">
-          <p className="font-serif text-4xl lg:text-5xl italic leading-tight text-black/90">
-            Un collectif autogéré à Bruxelles, fondé en 2014, qui organise, revendique et rend visible les droits des personnes sans titre de séjour.
-          </p>
-        </div>
+        <p className="text-base text-black/60 leading-relaxed max-w-2xl">
+          Un collectif autogéré à Bruxelles, fondé en 2014, qui organise, revendique et rend visible les droits des personnes sans titre de séjour.
+        </p>
       </header>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
-        
-        {/* CONTENU PRINCIPAL */}
-        <div className="lg:col-span-8 space-y-32">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+        <div className="lg:col-span-2 space-y-10">
 
-          {/* 01. IDENTITÉ & AUTOGESTION */}
-          <section className="relative">
-            <span className="absolute -left-12 top-0 font-anton text-6xl opacity-10">01</span>
-            <h2 className="font-anton text-5xl uppercase mb-10 border-b-2 border-black inline-block">
-              Identité & Auto-gestion
-            </h2>
-            <div className="font-mono text-lg leading-relaxed space-y-6">
-              <p>
-                La VSP Bruxelles est née en 2014 d'une occupation de bâtiment public pour revendiquer la régularisation de toutes les personnes sans papiers. Ce n’est pas une association classique : c’est un espace de vie collective et de lutte où les membres prennent toutes les décisions.
-              </p>
-              <div className="bg-white border-4 border-black p-8 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]">
-                <h3 className="font-anton text-2xl mb-4 text-[#BC0000]">Principes d'autogestion</h3>
-                <ul className="list-none space-y-3 text-sm font-bold">
-                  <li>— Décisions par assemblées générales souveraines</li>
-                  <li>— Charte définie par et pour les membres</li>
-                  <li>— Indépendance totale des alliés et partenaires extérieurs</li>
-                </ul>
-              </div>
+          <section className="space-y-4">
+            <h2 className="font-serif italic text-2xl text-black">Identité et autogestion</h2>
+            <p className="text-sm text-black/70 leading-relaxed">
+              La VSP Bruxelles est née en 2014 d'une occupation de bâtiment public pour revendiquer la régularisation de toutes les personnes sans papiers. Ce n'est pas une association classique : c'est un espace de vie collective et de lutte où les membres prennent toutes les décisions.
+            </p>
+            <div className="bg-[#F2F0EB] border border-black/5 rounded-sm p-5 space-y-2">
+              {[
+                'Décisions par assemblées générales souveraines',
+                'Charte définie par et pour les membres',
+                'Indépendance totale vis-à-vis des alliés et partenaires extérieurs',
+              ].map((item, i) => (
+                <p key={i} className="text-sm text-black/70 flex gap-2">
+                  <span className="text-[#BC0000] shrink-0">—</span>
+                  {item}
+                </p>
+              ))}
             </div>
           </section>
 
-          {/* 02. REVENDICATIONS POLITIQUES */}
-          <section className="bg-black text-white p-12 relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-4 font-anton text-9xl opacity-5">LUTTE</div>
-            <h2 className="font-anton text-5xl uppercase text-[#BC0000] mb-12">Plateforme de revendications</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="border-l-4 border-[#BC0000] pl-6">
-                <h4 className="font-anton text-xl mb-2">Régularisation totale</h4>
-                <p className="font-mono text-xs opacity-60">
-                  Droit inconditionnel pour toutes les personnes sans titre de séjour.
-                </p>
-              </div>
-              <div className="border-l-4 border-white/20 pl-6">
-                <h4 className="font-anton text-xl mb-2">Abolition des centres</h4>
-                <p className="font-mono text-xs opacity-60">
-                  Fin des expulsions et des centres de rétention.
-                </p>
-              </div>
+          <section className="space-y-4">
+            <h2 className="font-serif italic text-2xl text-black">Plateforme de revendications</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {revendications.map((r, i) => (
+                <div key={i} className="bg-white border border-black/8 rounded-sm p-5 shadow-sm">
+                  <h3 className="text-sm font-semibold text-black mb-1.5">{r.title}</h3>
+                  <p className="text-sm text-black/50 leading-relaxed">{r.desc}</p>
+                </div>
+              ))}
             </div>
+          </section>
+
+          <section className="bg-[#0F0F0F] text-white rounded-sm p-6">
+            <h3 className="font-serif italic text-xl text-white mb-3">Collectif parrain du festival</h3>
+            <p className="text-sm text-white/70 leading-relaxed">
+              Cette année, la VSP BXL est le collectif parrain. Elle garantit que les sans-papiers sont visibles, valorisés, et que le contenu respecte les valeurs politiques de la lutte. L'outil de la coopérative est à son service pour cette édition.
+            </p>
           </section>
         </div>
 
-        {/* SIDEBAR */}
-        <aside className="lg:col-span-4">
-          <div className="sticky top-40 space-y-12">
-            <div className="p-8 border-4 border-black bg-white shadow-[10px_10px_0px_0px_rgba(188,0,0,1)]">
-              <h3 className="font-anton text-2xl mb-6 uppercase">Échelle européenne</h3>
-              <p className="font-mono text-xs opacity-60 mb-6 leading-relaxed">
-                La VSP s’inscrit dans un réseau européen avec <strong>PICUM</strong> pour relier actions locales et plaidoyer international.
-              </p>
+        <aside className="lg:sticky lg:top-24 h-fit space-y-5">
+          <div className="bg-white border border-black/8 rounded-sm p-6 shadow-sm">
+            <h3 className="font-mono text-[10px] uppercase tracking-[0.25em] text-black/40 mb-5">En chiffres</h3>
+            <div className="space-y-3 text-sm">
+              <div className="flex justify-between border-b border-black/5 pb-3">
+                <span className="text-black/60">Fondé en</span>
+                <span className="font-semibold">2014</span>
+              </div>
+              <div className="flex justify-between border-b border-black/5 pb-3">
+                <span className="text-black/60">Réseau</span>
+                <span className="font-semibold">PICUM</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-black/60">Statut</span>
+                <span className="font-semibold">Collectif parrain</span>
+              </div>
             </div>
-            <div className="space-y-4">
-              <button 
-                onClick={() => dispatch({type: 'SET_VIEW', payload: 'cooperative'})}
-                className="w-full bg-[#BC0000] text-white font-anton text-2xl py-8 hover:bg-black transition-all shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] cursor-pointer"
+            <button
+              onClick={() => dispatch({ type: 'SET_VIEW', payload: 'cooperative' })}
+              className="mt-6 w-full bg-[#BC0000] text-white text-sm font-medium py-3 rounded-sm hover:bg-[#a00000] transition-colors cursor-pointer"
+            >
+              Soutenir le cycle
+            </button>
+          </div>
+
+          <div className="bg-[#F2F0EB] border border-black/5 rounded-sm p-5">
+            <h3 className="font-mono text-[10px] uppercase tracking-[0.25em] text-black/40 mb-3">En savoir plus</h3>
+            <div className="flex flex-col gap-2">
+              <button
+                onClick={() => dispatch({ type: 'SET_VIEW', payload: 'pact' })}
+                className="text-left text-sm text-black/70 hover:text-[#BC0000] transition-colors"
               >
-                SOUTENIR LE CYCLE
+                → Le pacte d'alliance
+              </button>
+              <button
+                onClick={() => dispatch({ type: 'SET_VIEW', payload: 'cooperative' })}
+                className="text-left text-sm text-black/70 hover:text-[#BC0000] transition-colors"
+              >
+                → La coopérative
               </button>
             </div>
           </div>
         </aside>
       </div>
+
+      <footer className="mt-16 pt-8 border-t border-black/10 text-center">
+        <button
+          onClick={() => dispatch({ type: 'SET_VIEW', payload: 'home' })}
+          className="text-sm text-black/40 hover:text-[#BC0000] transition-colors"
+        >
+          ← Retour à l'accueil
+        </button>
+      </footer>
     </article>
   );
 };

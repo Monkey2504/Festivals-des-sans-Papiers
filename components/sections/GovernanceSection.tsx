@@ -1,44 +1,57 @@
 
 import React from 'react';
+import { useInView } from '../../hooks/useInView';
+
+const ACTIFS = [
+  {
+    num: '01',
+    title: 'Un capital financier',
+    body: '5 000 € dédiés à la culture, qui appartiennent au collectif. Pas consommés en une soirée, mais fructifiés — investis en matériel propre, en compétences, en projets futurs que le collectif décide seul.',
+  },
+  {
+    num: '02',
+    title: 'Un département événementiel',
+    body: 'Une équipe interne formée, avec des rôles clairs : régie, programmation, communication, administration. Des gens capables d\'organiser d\'autres événements sans dépendre de Ballal ou du festival.',
+  },
+  {
+    num: '03',
+    title: 'Un réseau réel dans la cité',
+    body: 'Des contacts avec des lieux, des artistes, des techniciens, des structures locales. Un réseau qui appartient au collectif — pas au festival — et qui dure après la soirée.',
+  },
+];
 
 const GovernanceSection: React.FC = () => {
+  const { ref, isInView } = useInView(0.1);
+
   return (
-    <section id="gouvernance" className="px-8 py-48 bg-black text-white scroll-mt-32">
-      <div className="max-w-[1400px] mx-auto">
-        <div className="text-center mb-24">
-          <span className="font-mono text-xs text-[#BC0000] tracking-widest block mb-4 uppercase">Modèle Tripartite</span>
-          <h3 className="font-anton text-7xl lg:text-9xl mb-12 uppercase leading-none">ALLIANCE SOUVERAINE</h3>
-          <p className="font-serif text-3xl italic opacity-60 max-w-4xl mx-auto">
-            "Nous confions chaque édition à un collectif parrain pour garantir une action immédiate et une force politique pure."
+    <section
+      ref={ref as React.RefObject<HTMLElement>}
+      id="gouvernance"
+      className="px-4 sm:px-6 lg:px-8 py-16 md:py-24 bg-white"
+    >
+      <div className="max-w-5xl mx-auto">
+        {/* Header */}
+        <div className={`mb-10 transition-all duration-700 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#BC0000] mb-4">
+            Ce que chaque collectif construit
           </p>
+          <h2 className="font-serif italic text-3xl md:text-4xl text-black leading-tight">
+            Trois actifs qui restent longtemps après la soirée.
+          </h2>
         </div>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-1px bg-white/10 border border-white/10">
-          {[
-            { 
-              title: 'LA COOPÉRATIVE', 
-              actor: 'THE MOVMENT', 
-              role: 'Assure l\'outil de gestion, garantit la viabilité financière et maintient la vision à long terme.', 
-              color: 'text-white' 
-            },
-            { 
-              title: 'LE COLLECTIF PARRAIN', 
-              actor: 'VSP BXL', 
-              role: 'Porte la dimension politique, valide le contenu et valorise les personnes en lutte.', 
-              color: 'text-[#BC0000]' 
-            },
-            { 
-              title: 'LE LIEU D\'ACCUEIL', 
-              actor: 'SALLES PARTENAIRES', 
-              role: 'Offre son infrastructure, son public local et son expertise technique au projet.', 
-              color: 'text-white/60' 
-            }
-          ].map((item, i) => (
-            <div key={i} className="bg-black p-12 hover:bg-white/5 transition-colors border-r border-white/10 last:border-0">
-              <div className={`font-anton text-2xl mb-2 ${item.color} uppercase tracking-tighter`}>{item.title}</div>
-              <div className="font-mono text-sm font-bold border-b border-white/20 pb-4 mb-6 uppercase tracking-widest">{item.actor}</div>
-              <p className="font-serif text-2xl italic opacity-70 leading-tight">{item.role}</p>
-            </div>
+
+        {/* Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+          {ACTIFS.map((actif, i) => (
+            <article
+              key={i}
+              className={`bg-[#F2F0EB] rounded-sm p-6 md:p-7 border border-black/5 transition-all duration-500 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+              style={{ transitionDelay: isInView ? `${i * 100}ms` : '0ms' }}
+            >
+              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#BC0000] block mb-4">{actif.num}</span>
+              <h3 className="text-base font-semibold text-black mb-3 leading-snug">{actif.title}</h3>
+              <p className="text-sm text-black/60 leading-relaxed">{actif.body}</p>
+            </article>
           ))}
         </div>
       </div>

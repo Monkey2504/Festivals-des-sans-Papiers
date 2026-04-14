@@ -1,70 +1,124 @@
 
 import React from 'react';
+import { useAppContext } from '../../context/AppContext';
 import { APP_CONFIG } from '../../constants';
 
 const FinanceDetail: React.FC = () => {
+  const { dispatch } = useAppContext();
+  const totalBudget = APP_CONFIG.BUDGET_DETAILS.reduce((sum, i) => sum + i.amount, 0);
+
   return (
-    <article className="max-w-[1000px] mx-auto px-8 py-24 text-black">
-      <header className="mb-24 border-b-8 border-black pb-16">
-        <span className="font-mono text-sm text-[#BC0000] font-black tracking-widest block mb-4 uppercase italic">Souveraineté Financière</span>
-        <h1 className="font-anton text-[10vw] leading-none tracking-tighter uppercase">TRANSPARENCE <br/><span className="text-[#BC0000]">SOLAIRE.</span></h1>
+    <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-black">
+      <header className="mb-16 border-b border-black/10 pb-10">
+        <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#BC0000] mb-5">Souveraineté financière</p>
+        <h1 className="font-serif italic text-4xl md:text-5xl leading-tight mb-5">Transparence totale.</h1>
+        <p className="text-base text-black/60 leading-relaxed max-w-2xl">
+          Chaque euro généré par le cycle VSP (Tournée + Festival) revient à la VSP. La coopérative ne conserve que son capital d'outil de base pour maintenir l'infrastructure.
+        </p>
       </header>
 
-      <section className="space-y-32">
-        <div className="bg-[#BC0000] text-white p-12 shadow-[20px_20px_0px_0px_rgba(0,0,0,1)]">
-          <h2 className="font-anton text-5xl mb-6 uppercase tracking-tighter">UNE ÉCONOMIE DE LUTTE</h2>
-          <p className="font-serif text-3xl italic leading-tight mb-8">
-            "Chaque euro généré par le cycle VSP (Tournée + Festival) revient à la VSP."
-          </p>
-          <p className="font-mono text-lg opacity-90 leading-relaxed">
-            La Coopérative ne conserve que son capital d'outil de base (15k€) pour maintenir l'infrastructure. 
-            Tout le surplus budgétaire de cette édition est un levier direct pour le collectif parrain. 
-            Nous bâtissons une banque de solidarité tournante.
-          </p>
-        </div>
+      <div className="space-y-12">
 
         {/* Phase 1 */}
-        <div className="relative">
-          <div className="absolute -left-12 top-0 text-[#BC0000] font-anton text-8xl opacity-10 select-none">01</div>
-          <h2 className="font-anton text-6xl mb-12 uppercase tracking-tighter border-b-4 border-black inline-block text-black">CAPITAL DE L'OUTIL ({APP_CONFIG.CROWDFUNDING_GOAL.toLocaleString()}€)</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div className="space-y-6">
-              <p className="font-mono text-sm leading-relaxed text-black/70">
-                C'est l'investissement initial nécessaire pour créer la coopérative, le matériel de tournée et la structure juridique. Cet outil reste la propriété de la coopérative et sera transmis de collectif en collectif au fil des éditions.
-              </p>
-              <ul className="space-y-4">
-                {APP_CONFIG.BUDGET_DETAILS.map((b, i) => (
-                  <li key={i} className="flex justify-between items-baseline border-b border-black/10 pb-2">
-                    <span className="font-mono text-xs uppercase">{b.label}</span>
-                    <span className="font-anton text-2xl">{b.amount}€</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+        <section>
+          <div className="flex items-baseline gap-4 mb-6">
+            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#BC0000]">Phase 1</span>
+            <h2 className="font-serif italic text-2xl text-black">
+              Capital de l'outil — {APP_CONFIG.CROWDFUNDING_GOAL.toLocaleString()} €
+            </h2>
           </div>
-        </div>
+          <p className="text-sm text-black/60 leading-relaxed mb-6 max-w-2xl">
+            L'investissement initial pour créer la coopérative, le matériel de tournée et la structure juridique. Cet outil reste la propriété de la coopérative et sera transmis de collectif en collectif au fil des éditions.
+          </p>
+          <div className="overflow-x-auto border border-black/10 rounded-sm bg-white shadow-sm">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-black/10 bg-[#F2F0EB]">
+                  <th className="px-5 py-3 text-left font-mono text-[10px] uppercase tracking-[0.2em] text-black/50">Poste</th>
+                  <th className="px-5 py-3 text-right font-mono text-[10px] uppercase tracking-[0.2em] text-black/50">Montant</th>
+                  <th className="px-5 py-3 text-right font-mono text-[10px] uppercase tracking-[0.2em] text-black/50">%</th>
+                </tr>
+              </thead>
+              <tbody>
+                {APP_CONFIG.BUDGET_DETAILS.map((item, i) => {
+                  const pct = totalBudget > 0 ? Math.round((item.amount / totalBudget) * 100) : 0;
+                  return (
+                    <tr key={i} className="border-b border-black/5">
+                      <td className="px-5 py-4">
+                        <p className="text-sm font-medium text-black">{item.label}</p>
+                        {item.desc && <p className="text-xs text-black/40 mt-0.5">{item.desc}</p>}
+                      </td>
+                      <td className="px-5 py-4 text-right font-mono text-sm font-semibold text-[#BC0000]">
+                        {item.amount.toLocaleString('fr-BE')} €
+                      </td>
+                      <td className="px-5 py-4 text-right font-mono text-xs text-black/40">{pct}%</td>
+                    </tr>
+                  );
+                })}
+                <tr className="bg-[#F2F0EB]">
+                  <td className="px-5 py-4 text-sm font-semibold text-black">Total</td>
+                  <td className="px-5 py-4 text-right font-mono text-sm font-bold text-[#BC0000]">
+                    {totalBudget.toLocaleString('fr-BE')} €
+                  </td>
+                  <td className="px-5 py-4 text-right font-mono text-xs text-black/40">100%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
 
         {/* Phase 2 */}
-        <div className="relative">
-          <div className="absolute -left-12 top-0 text-[#BC0000] font-anton text-8xl opacity-10 select-none">02</div>
-          <div className="bg-[#F2F0EB] p-12 border-4 border-black shadow-[20px_20px_0px_0px_rgba(188,0,0,1)] text-black">
-            <h2 className="font-anton text-6xl mb-8 uppercase tracking-tighter text-[#BC0000]">OBJECTIF CYCLE ({APP_CONFIG.PHASE_2_GOAL.toLocaleString()}€)</h2>
-            <p className="font-serif text-3xl mb-12 italic leading-tight">
-              C'est l'objectif du cycle complet (Tournée des quartiers + Festival National). Il garantit une souveraineté financière totale pour la VSP BXL.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="p-6 bg-white border-2 border-black">
-                <h3 className="font-anton text-xl mb-2">OPÉRATIONS & LOGISTIQUE</h3>
-                <p className="font-anton text-4xl mt-4">90.000€</p>
-              </div>
-              <div className="p-6 bg-white border-2 border-black">
-                <h3 className="font-anton text-xl mb-2">TRÉSORERIE DE LUTTE VSP</h3>
-                <p className="font-anton text-4xl mt-4">60.000€</p>
-              </div>
+        <section>
+          <div className="flex items-baseline gap-4 mb-6">
+            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#BC0000]">Phase 2</span>
+            <h2 className="font-serif italic text-2xl text-black">
+              Objectif cycle — {APP_CONFIG.PHASE_2_GOAL.toLocaleString()} €
+            </h2>
+          </div>
+          <p className="text-sm text-black/60 leading-relaxed mb-6 max-w-2xl">
+            L'objectif du cycle complet (Tournée des quartiers + Festival National). Il garantit une souveraineté financière totale pour la VSP BXL.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="bg-white border border-black/8 rounded-sm p-6 shadow-sm">
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-black/40 mb-3">Opérations & logistique</p>
+              <p className="font-serif italic text-3xl text-black">90 000 €</p>
+              <p className="text-xs text-black/50 mt-2 leading-relaxed">Artistes, technique, communication, lieux.</p>
+            </div>
+            <div className="bg-[#BC0000]/5 border border-[#BC0000]/20 rounded-sm p-6">
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#BC0000] mb-3">Trésorerie de lutte VSP</p>
+              <p className="font-serif italic text-3xl text-black">60 000 €</p>
+              <p className="text-xs text-black/50 mt-2 leading-relaxed">Reversés directement au collectif parrain.</p>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+        {/* Principes */}
+        <section className="bg-[#0F0F0F] text-white rounded-sm p-8">
+          <h2 className="font-serif italic text-xl text-white mb-6">Une économie de lutte</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {[
+              { title: 'Zéro profit', body: '100% des bénéfices sont réinvestis dans la lutte. Pas de dividendes.' },
+              { title: 'Audit public', body: 'Les comptes sont audités annuellement et accessibles à tous les membres.' },
+              { title: 'Équité salariale', body: 'Un forfait solidaire unique appliqué à l\'ensemble des artistes.' },
+            ].map((p, i) => (
+              <div key={i} className="bg-white/5 border border-white/10 rounded-sm p-5">
+                <h3 className="text-sm font-semibold text-white mb-2">{p.title}</h3>
+                <p className="text-xs text-white/50 leading-relaxed">{p.body}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+      </div>
+
+      <footer className="mt-16 pt-8 border-t border-black/10 text-center">
+        <button
+          onClick={() => dispatch({ type: 'SET_VIEW', payload: 'home' })}
+          className="text-sm text-black/40 hover:text-[#BC0000] transition-colors"
+        >
+          ← Retour à l'accueil
+        </button>
+      </footer>
     </article>
   );
 };
