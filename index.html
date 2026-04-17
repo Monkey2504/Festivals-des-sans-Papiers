@@ -1,38 +1,35 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Movment | Coopérative Sociale de Lutte</title>
-    <!-- SEO Social Meta Tags -->
-    <meta name="description" content="Coopérative The Movment : Festival d'Auto-organisation des Sans-Papiers. Un modèle d'économie sociale et solidaire pour la régularisation.">
-    <meta property="og:title" content="The Movment - Souveraineté Collective">
-    <meta property="og:image" content="https://picsum.photos/seed/vsp-coop/1200/630">
+    <meta name="theme-color" content="#0F0F0F">
+    <title>Festival des Sans-Papiers | Bruxelles 2025–2026</title>
+    <meta name="description" content="Un réseau de soirées culturelles co-organisées avec des collectifs de sans-papiers — quartier par quartier, à Bruxelles.">
+    <meta property="og:title" content="Festival des Sans-Papiers · Bruxelles 2025–2026">
+    <meta property="og:description" content="Un réseau de soirées culturelles co-organisées avec des collectifs de sans-papiers — quartier par quartier, à Bruxelles.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=1200">
     <meta property="og:type" content="website">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts — non-blocking -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700&family=Public+Sans:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700&family=Public+Sans:wght@400;700;900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700&family=Public+Sans:wght@400;700;900&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700&family=Public+Sans:wght@400;700;900&display=swap"></noscript>
+
     <style>
-        :root {
-            --bg: #F2F0EB;
-            --black: #0F0F0F;
-            --red: #BC0000;
-            --gold: #A68A56;
-        }
         body {
             font-family: 'Public Sans', sans-serif;
-            background-color: var(--bg);
-            color: var(--black);
+            background-color: #F2F0EB;
+            color: #0F0F0F;
             overflow-x: hidden;
         }
         .font-serif { font-family: 'Instrument Serif', serif; }
         .font-anton { font-family: 'Anton', sans-serif; text-transform: uppercase; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
 
-        /* --- Animations d'entrée --- */
+        /* Animations d'entrée hero */
         @keyframes fadeSlideUp {
             from { opacity: 0; transform: translateY(20px); }
             to   { opacity: 1; transform: translateY(0); }
@@ -48,13 +45,10 @@
         .delay-600 { animation-delay: 600ms; }
         .delay-800 { animation-delay: 800ms; }
 
-        /* --- Utilitaires --- */
-        .table-row-hover:hover {
-            background-color: rgba(188, 0, 0, 0.04);
-        }
+        .table-row-hover:hover { background-color: rgba(188, 0, 0, 0.04); }
     </style>
 </head>
-<body class="grain">
+<body>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
 </body>

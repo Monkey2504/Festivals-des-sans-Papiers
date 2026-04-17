@@ -48,7 +48,7 @@ const App: React.FC = () => {
       <Header />
       <JoinModal />
 
-      <main role="main" className={`transition-opacity duration-400 pb-16 ${fade ? 'opacity-100' : 'opacity-0'}`}>
+      <main role="main" className={`transition-opacity duration-300 pb-16 ${fade ? 'opacity-100' : 'opacity-0'}`}>
         {renderContent()}
 
         {!isHome && (
@@ -127,7 +127,7 @@ const App: React.FC = () => {
       </main>
 
       <GeminiAuditor />
-      <CrowdfundingTracker goal={APP_CONFIG.CROWDFUNDING_GOAL} raisedInitial={APP_CONFIG.INITIAL_RAISED} t={t.common} />
+      <CrowdfundingTracker />
     </div>
   );
 };

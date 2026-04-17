@@ -1,7 +1,7 @@
 
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useAppContext } from '../../context/AppContext';
-import { View } from '../../types';
+import { Language, View } from '../../types';
 import LanguageSwitcher from '../LanguageSwitcher';
 import { APP_CONFIG } from '../../constants';
 
@@ -15,19 +15,26 @@ const NAV_ITEMS: { view: View; label: string }[] = [
 
 const Header: React.FC = () => {
   const { state, dispatch } = useAppContext();
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  const handleSetLang = useCallback((lang: any) => {
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 100);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleSetLang = useCallback((lang: Language) => {
     dispatch({ type: 'SET_LANGUAGE', payload: lang });
   }, [dispatch]);
 
   const setView = (view: View) => dispatch({ type: 'SET_VIEW', payload: view });
   const isHome = state.currentView === 'home';
-  const isTransparent = isHome && !state.isScrolled && !state.isMenuOpen;
+  const isTransparent = isHome && !isScrolled && !state.isMenuOpen;
 
   return (
     <>
       <header
-        className={`fixed top-0 left-0 w-full z-[100] transition-all duration-400 ${
+        className={`fixed top-0 left-0 w-full z-[100] transition-all duration-300 ${
           isTransparent
             ? 'bg-transparent py-6 text-white'
             : 'bg-white/95 backdrop-blur-sm py-4 border-b border-black/10 shadow-sm text-black'
@@ -78,7 +85,8 @@ const Header: React.FC = () => {
             <button
               onClick={() => dispatch({ type: 'TOGGLE_MENU' })}
               className="lg:hidden flex flex-col gap-1.5 p-2 cursor-pointer"
-              aria-label="Menu"
+              aria-label={state.isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+              aria-expanded={state.isMenuOpen}
             >
               <span className={`w-6 h-0.5 transition-all duration-300 ${isTransparent ? 'bg-white' : 'bg-black'} ${state.isMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
               <span className={`w-6 h-0.5 transition-all duration-300 ${isTransparent ? 'bg-white' : 'bg-black'} ${state.isMenuOpen ? 'opacity-0' : ''}`} />
@@ -89,7 +97,10 @@ const Header: React.FC = () => {
       </header>
 
       {/* Mobile Menu */}
-      <div className={`fixed inset-0 z-[90] bg-[#0F0F0F]/97 backdrop-blur-md transition-all duration-500 ease-in-out ${state.isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+      <div
+        className={`fixed inset-0 z-[90] bg-[#0F0F0F]/97 backdrop-blur-md transition-all duration-500 ease-in-out ${state.isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+        aria-hidden={!state.isMenuOpen}
+      >
         <div className="h-full flex flex-col justify-center items-center gap-8 p-8">
           <nav className="flex flex-col gap-6 text-center">
             {[{ view: 'home' as View, label: 'Accueil' }, ...NAV_ITEMS].map(({ view, label }) => (
@@ -104,7 +115,10 @@ const Header: React.FC = () => {
           </nav>
 
           <button
-            onClick={() => { dispatch({ type: 'TOGGLE_JOIN_MODAL', payload: true }); dispatch({ type: 'TOGGLE_MENU' }); }}
+            onClick={() => {
+              dispatch({ type: 'TOGGLE_JOIN_MODAL', payload: true });
+              dispatch({ type: 'TOGGLE_MENU' });
+            }}
             className="bg-[#BC0000] text-white text-sm font-medium px-8 py-3 rounded-sm hover:bg-[#a00000] transition-colors mt-4"
           >
             Rejoindre la coop

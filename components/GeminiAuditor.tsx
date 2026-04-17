@@ -2,6 +2,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { GoogleGenAI } from '@google/genai';
 
+// Single SDK instance — not re-created on every message
+const ai = process.env.API_KEY ? new GoogleGenAI({ apiKey: process.env.API_KEY }) : null;
+
 const GeminiAuditor: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<{ role: 'user' | 'ai'; text: string }[]>([]);
@@ -22,10 +25,15 @@ const GeminiAuditor: React.FC = () => {
     setMessages(prev => [...prev, { role: 'user', text: userMsg }]);
     setLoading(true);
 
+    if (!ai) {
+      setMessages(prev => [...prev, { role: 'ai', text: 'Assistant non configuré. Contactez-nous à contact@festivalsanspapiers.be' }]);
+      setLoading(false);
+      return;
+    }
+
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       const response = await ai.models.generateContent({
-        model: 'gemini-2-flash',
+        model: 'gemini-2.0-flash',
         contents: userMsg,
         config: {
           systemInstruction: `Tu es un membre de THE MOVMENT / Festival des Sans-Papiers.

@@ -1,17 +1,14 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { TranslationSet } from '../types';
-import { APP_CONFIG } from '../constants';
 import { useAppContext } from '../context/AppContext';
+import { TRANSLATIONS, APP_CONFIG } from '../constants';
 
-interface Props {
-  goal: number;
-  raisedInitial: number;
-  t: TranslationSet['common'];
-}
+const CrowdfundingTracker: React.FC = () => {
+  const { state, dispatch } = useAppContext();
+  const t = TRANSLATIONS[state.language].common;
+  const goal = APP_CONFIG.CROWDFUNDING_GOAL;
+  const raisedInitial = APP_CONFIG.INITIAL_RAISED;
 
-const CrowdfundingTracker: React.FC<Props> = ({ goal, raisedInitial, t }) => {
-  const { dispatch } = useAppContext();
   const [currentRaised, setCurrentRaised] = useState(0);
   const animationRef = useRef<number | null>(null);
 

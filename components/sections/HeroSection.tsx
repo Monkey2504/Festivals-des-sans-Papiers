@@ -8,7 +8,6 @@ const HeroSection: React.FC = () => {
   return (
     <section
       className="relative min-h-screen flex flex-col items-center justify-center bg-[#0F0F0F] text-white px-4 sm:px-6 lg:px-8 py-32"
-      role="banner"
     >
       {/* Background image with overlay */}
       <div className="absolute inset-0 pointer-events-none">
