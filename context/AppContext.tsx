@@ -1,13 +1,12 @@
 
-import React, { createContext, useContext, useReducer, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useReducer, useEffect, useMemo, useRef, ReactNode } from 'react';
 import { Language, AppState, View } from '../types';
 
-type AppAction = 
+type AppAction =
   | { type: 'SET_LANGUAGE'; payload: Language }
   | { type: 'SET_VIEW'; payload: View }
   | { type: 'TOGGLE_MENU' }
-  | { type: 'TOGGLE_JOIN_MODAL'; payload?: boolean }
-  | { type: 'SET_SCROLL'; payload: { y: number; isScrolled: boolean } };
+  | { type: 'TOGGLE_JOIN_MODAL'; payload?: boolean };
 
 const getInitialView = (): View => {
   const hash = window.location.hash.replace('#', '') as View;
@@ -20,8 +19,6 @@ const initialState: AppState = {
   currentView: getInitialView(),
   isMenuOpen: false,
   isJoinModalOpen: false,
-  scrollY: 0,
-  isScrolled: false,
 };
 
 const AppContext = createContext<{
@@ -32,27 +29,15 @@ const AppContext = createContext<{
 const appReducer = (state: AppState, action: AppAction): AppState => {
   switch (action.type) {
     case 'SET_LANGUAGE':
-      localStorage.setItem('preferred_language', action.payload);
       return { ...state, language: action.payload };
     case 'SET_VIEW':
-      if (window.location.hash !== `#${action.payload}`) {
-        window.location.hash = action.payload === 'home' ? '' : action.payload;
-      }
-      window.scrollTo({ top: 0, behavior: 'smooth' });
       return { ...state, currentView: action.payload, isMenuOpen: false };
     case 'TOGGLE_MENU':
       return { ...state, isMenuOpen: !state.isMenuOpen };
-    case 'TOGGLE_JOIN_MODAL':
-      const newState = action.payload !== undefined ? action.payload : !state.isJoinModalOpen;
-      if (newState) document.body.style.overflow = 'hidden';
-      else document.body.style.overflow = 'unset';
-      return { ...state, isJoinModalOpen: newState };
-    case 'SET_SCROLL':
-      return { 
-        ...state, 
-        scrollY: action.payload.y, 
-        isScrolled: action.payload.isScrolled 
-      };
+    case 'TOGGLE_JOIN_MODAL': {
+      const next = action.payload !== undefined ? action.payload : !state.isJoinModalOpen;
+      return { ...state, isJoinModalOpen: next };
+    }
     default:
       return state;
   }
@@ -60,40 +45,57 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
 
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(appReducer, initialState);
+  const isFirstRender = useRef(true);
 
+  // Persist language preference
+  useEffect(() => {
+    localStorage.setItem('preferred_language', state.language);
+  }, [state.language]);
+
+  // Sync document language attribute
+  useEffect(() => {
+    const langMap: Record<Language, string> = { FR: 'fr', NL: 'nl', EN: 'en' };
+    document.documentElement.lang = langMap[state.language];
+  }, [state.language]);
+
+  // Sync URL hash with current view
+  useEffect(() => {
+    const newHash = state.currentView === 'home' ? '' : state.currentView;
+    const currentHash = window.location.hash.replace('#', '');
+    if (currentHash !== newHash) {
+      window.location.hash = newHash;
+    }
+  }, [state.currentView]);
+
+  // Scroll to top on view change (skip initial load)
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [state.currentView]);
+
+  // Lock/unlock body scroll when modal opens
+  useEffect(() => {
+    document.body.style.overflow = state.isJoinModalOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [state.isJoinModalOpen]);
+
+  // Handle browser back/forward navigation via hash
   useEffect(() => {
     const handleHashChange = () => {
       const view = getInitialView();
-      if (view !== state.currentView) {
-        dispatch({ type: 'SET_VIEW', payload: view });
-      }
+      dispatch({ type: 'SET_VIEW', payload: view });
     };
-
     window.addEventListener('hashchange', handleHashChange);
-    
-    let ticking = false;
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          dispatch({ 
-            type: 'SET_SCROLL', 
-            payload: { y: window.scrollY, isScrolled: window.scrollY > 100 } 
-          });
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('hashchange', handleHashChange);
-    };
-  }, [state.currentView]);
+  const contextValue = useMemo(() => ({ state, dispatch }), [state]);
 
   return (
-    <AppContext.Provider value={{ state, dispatch }}>
+    <AppContext.Provider value={contextValue}>
       {children}
     </AppContext.Provider>
   );

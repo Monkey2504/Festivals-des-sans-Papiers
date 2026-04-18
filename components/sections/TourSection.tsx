@@ -1,66 +1,70 @@
 
 import React from 'react';
 import { useAppContext } from '../../context/AppContext';
+import { useInView } from '../../hooks/useInView';
+
+const TIMELINE = [
+  { step: '01', label: 'Soirée locale', desc: 'Dans les quartiers, avec les collectifs' },
+  { step: '02', label: 'Événement régional', desc: 'Mutualisation des réseaux' },
+  { step: '03', label: 'Festival national', desc: 'La grande scène collective' },
+  { step: '04', label: 'Coopérative autonome', desc: 'Passation de l\'outil' },
+];
 
 const TourSection: React.FC = () => {
   const { dispatch } = useAppContext();
+  const { ref, isInView } = useInView(0.1);
 
   return (
-    <section id="tournee" className="px-8 py-48 bg-white border-y-4 border-black scroll-mt-32 overflow-hidden">
-      <div className="max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
-          <div>
-            <span className="font-mono text-xs text-[#BC0000] font-black tracking-widest block mb-4 uppercase italic">Répertoire d'Action</span>
-            <h3 className="font-anton text-8xl lg:text-9xl tracking-tighter uppercase leading-[0.8] mb-12 text-black">
-              TERRITOIRE <br/>EN LUTTE.
-            </h3>
-            <div className="space-y-8 font-serif text-3xl italic leading-tight text-black opacity-90">
-              <p className="border-l-8 border-[#BC0000] pl-8">
-                "La tournée des quartiers n'est pas une promotion, c'est l'acte de subjectivation politique par l'occupation de l'espace public."
-              </p>
-              <p className="text-2xl leading-relaxed">
-                Le festival commence là où les gens vivent. En territorialisant la lutte, nous transformons chaque commune en une zone d'affirmation. 
-                Les bénéfices financent directement la <strong>VSP BXL</strong>, transformant la solidarité culturelle en levier juridique.
-              </p>
-              <div className="flex flex-wrap gap-8">
-                <button 
-                  onClick={() => dispatch({type: 'SET_VIEW', payload: 'vsp'})}
-                  className="font-anton text-2xl border-b-4 border-black hover:text-[#BC0000] hover:border-[#BC0000] transition-all uppercase pt-4 cursor-pointer"
-                >
-                  DÉCOUVRIR LE RÉCIT VSP →
-                </button>
+    <section
+      ref={ref as React.RefObject<HTMLElement>}
+      id="tournee"
+      className="px-4 sm:px-6 lg:px-8 py-16 md:py-24 bg-[#0F0F0F] text-white"
+    >
+      <div className="max-w-5xl mx-auto">
+        {/* Header */}
+        <div className={`mb-12 transition-all duration-700 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#BC0000] mb-4">
+            La progression
+          </p>
+          <h2 className="font-serif italic text-3xl md:text-4xl text-white leading-tight mb-6">
+            Du quartier à la région. De la région au national.
+          </h2>
+          <p className="text-base text-white/60 leading-relaxed max-w-2xl">
+            Les soirées locales sont le premier échelon. Quand plusieurs collectifs renforcés se retrouvent, ils mutualisent leurs moyens, leurs réseaux, leurs compétences. En parallèle, une coopérative se construit progressivement — l'objectif est que le festival soit entièrement indépendant, géré par ceux qui l'ont construit.
+          </p>
+        </div>
+
+        {/* Timeline */}
+        <div className={`grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 transition-all duration-700 delay-200 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          {TIMELINE.map((item, i) => (
+            <div key={i} className="relative">
+              {/* Connector */}
+              {i < TIMELINE.length - 1 && (
+                <div className="hidden md:block absolute top-4 left-full w-full h-px bg-white/10 z-0" style={{ width: 'calc(100% - 1rem)' }} />
+              )}
+              <div className="relative z-10 bg-white/5 border border-white/10 rounded-sm p-4">
+                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#BC0000] block mb-2">{item.step}</span>
+                <p className="text-sm font-medium text-white mb-1">{item.label}</p>
+                <p className="text-xs text-white/40 leading-relaxed">{item.desc}</p>
               </div>
             </div>
-          </div>
+          ))}
+        </div>
 
-          <div className="bg-[#F2F0EB] border-4 border-black p-12 shadow-[20px_20px_0px_0px_rgba(0,0,0,1)] relative flex flex-col">
-            <h4 className="font-anton text-5xl mb-8 uppercase tracking-tighter leading-none text-black">L'OUTIL <br/><span className="text-[#BC0000]">SOUVERAIN.</span></h4>
-            <p className="font-mono text-sm mb-12 leading-relaxed text-black italic font-bold">
-              Pour cette édition, 100% des bénéfices sont acquis à la Voix des Sans-Papiers pour briser l'isolement et porter les revendications nationales.
-            </p>
-            
-            <div className="space-y-8 mb-16">
-              <div className="flex gap-6 items-center">
-                <div className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center font-anton text-xl shrink-0">01</div>
-                <p className="font-anton text-xl uppercase text-black">Occupations & Visibilité</p>
-              </div>
-              <div className="flex gap-6 items-center">
-                <div className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center font-anton text-xl shrink-0">02</div>
-                <p className="font-anton text-xl uppercase text-black">Cultures & Chorales Militantes</p>
-              </div>
-              <div className="flex gap-6 items-center">
-                <div className="w-12 h-12 rounded-full bg-[#BC0000] text-white flex items-center justify-center font-anton text-xl shrink-0">03</div>
-                <p className="font-anton text-xl uppercase text-black">Régularisation sur critères clairs</p>
-              </div>
-            </div>
-
-            <button 
-              onClick={() => dispatch({type: 'SET_VIEW', payload: 'cooperative'})}
-              className="w-full bg-black text-white font-anton text-3xl py-8 hover:bg-[#BC0000] transition-all shadow-[8px_8px_0px_0px_rgba(188,0,0,1)] text-center block cursor-pointer"
-            >
-              INVESTIR DANS L'OUTIL
-            </button>
-          </div>
+        {/* CTA */}
+        <div className={`flex flex-col sm:flex-row gap-3 transition-all duration-700 delay-300 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          <button
+            onClick={() => dispatch({ type: 'SET_VIEW', payload: 'tour' })}
+            className="bg-white text-black px-6 py-3 text-sm font-medium rounded-sm hover:bg-[#F2F0EB] transition-colors cursor-pointer"
+          >
+            Voir le détail de la tournée →
+          </button>
+          <button
+            onClick={() => dispatch({ type: 'SET_VIEW', payload: 'cooperative' })}
+            className="border border-white/20 text-white px-6 py-3 text-sm font-medium rounded-sm hover:border-white/50 transition-colors cursor-pointer"
+          >
+            La coopérative
+          </button>
         </div>
       </div>
     </section>
